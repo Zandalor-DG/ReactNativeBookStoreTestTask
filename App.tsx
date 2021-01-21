@@ -10,25 +10,29 @@
 
 import React from 'react';
 import {
+  Alert,
+  Button,
   SafeAreaView,
-  StyleSheet,
   ScrollView,
-  View,
-  Text,
   StatusBar,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
-
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
   DebugInstructions,
+  Header,
+  LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
+  const clickMe = () => {
+    Alert.alert('Click me');
+  };
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -46,9 +50,16 @@ const App = () => {
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Step One</Text>
               <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-                screen and then come back to see your edits.
+                Edit <Text style={styles.highlight}>App.tsx</Text> to change
+                this screen and then come back to see your edits.
               </Text>
+            </View>
+            <View style={styles.buttonClick}>
+              <Button
+                //style={styles.buttonClick}
+                onPress={clickMe}
+                title="click me"
+              />
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>See Your Changes</Text>
@@ -79,6 +90,11 @@ const App = () => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
+  },
+  buttonClick: {
+    shadowRadius: 2,
+    marginTop: 32,
+    paddingHorizontal: 24,
   },
   engine: {
     position: 'absolute',
