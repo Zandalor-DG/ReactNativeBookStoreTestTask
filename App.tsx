@@ -14,42 +14,77 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/components/home/HomeScreen';
 import NavigationScreen from './src/components/navigation/NavigationScreen';
-import CreatePostScreen from './src/components/createPostScreen/createPostScreen';
+import {Alert, Button} from 'react-native';
+import {Provider} from 'react-redux';
+import store from './src/store';
+import Book from './src/components/home/Book';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            title: 'Home page',
-            // headerStyle: {
-            //   backgroundColor: '#f4511e',
-            // },
-          }}
-        />
-        <Stack.Screen
-          name="Navigation"
-          component={NavigationScreen}
-          options={{title: 'Navigation Page', headerTintColor: '#fff'}}
-        />
-        <Stack.Screen
-          name="CreatePost"
-          component={CreatePostScreen}
-          options={{
-            title: 'Create post',
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          // options={({navigation, route}: any) => ({
+          //   headerTitle: (props: any) => <LogoTitle {...props} />,
+          // })}
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#0f0d0d',
+            },
             headerTintColor: '#fff',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+            headerRight: () => (
+              <Button
+                onPress={() => Alert.alert('This is a button!')}
+                title="Info"
+                color="#fff"
+              />
+            ),
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              title: 'Home page',
+              // headerStyle: {
+              //   backgroundColor: '#f4511e',
+              // },
+              headerRight: () => (
+                <Button
+                  onPress={() => Alert.alert('This is a home!')}
+                  title="navi"
+                  color="#fff"
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="Navigation"
+            component={NavigationScreen}
+            options={{
+              title: 'Navigation Page',
+              headerTintColor: '#fff',
+            }}
+          />
+          <Stack.Screen
+            name="Book"
+            component={Book}
+            options={{
+              title: 'Book',
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
