@@ -3,6 +3,10 @@ import {useDispatch} from 'react-redux';
 import {allBooks} from '../../store/bookStoreStore/thunkBookStore';
 import {FilterState} from '../filterComponent/filterReducer';
 import BooksAll from './BooksAll';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import NavigationScreen from '../navigation/NavigationScreen';
+import ShoppingCart from './ShoppingCart';
+import Notifications from '../notifications/Notifications';
 
 interface Props {
   route: {
@@ -14,7 +18,9 @@ interface Props {
   navigation: any;
 }
 
-const HomeScreen: React.FC<Props> = ({navigation, route}: Props) => {
+const Tab = createBottomTabNavigator();
+
+const HomeScreen: React.FC<Props> = ({route}: Props) => {
   //const value = route.params?.filterParams;
   const dispatch = useDispatch();
 
@@ -37,9 +43,12 @@ const HomeScreen: React.FC<Props> = ({navigation, route}: Props) => {
   }, [route.params]);
 
   return (
-    <>
-      <BooksAll navigation={navigation} />
-    </>
+    <Tab.Navigator>
+      <Tab.Screen name="Navigation" component={NavigationScreen} />
+      <Tab.Screen name="AllBooks" component={BooksAll} />
+      <Tab.Screen name="ShoppingCart" component={ShoppingCart} />
+      <Tab.Screen name="Notifications" component={Notifications} />
+    </Tab.Navigator>
   );
 };
 

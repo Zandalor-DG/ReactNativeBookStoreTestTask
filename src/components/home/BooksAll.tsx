@@ -23,21 +23,19 @@ const BooksAll: React.FC<Props> = ({navigation}: Props) => {
   ) : (
     books.map((item) => {
       return (
-        <View key={item.id} style={styles.sectionContainer}>
-          <View style={styles.buttonContainer}>
-            <Button
-              color="tomato"
-              title={item.name}
-              onPress={() => navigation.navigate('Book')}
+        <Text
+          key={item.id}
+          style={styles.onpress}
+          onPress={() => navigation.navigate('Book')}>
+          <View style={styles.sectionContainer}>
+            <Image
+              source={{uri: baseURL + item.File.path_name}}
+              style={{width: 80, height: 140}}
             />
+            <Text>by {item.Author.name}</Text>
+            <Text>Price: {item.price}</Text>
           </View>
-          <Image
-            source={{uri: baseURL + item.File.path_name}}
-            style={{width: 80, height: 140}}
-          />
-          <Text>by {item.Author.name}</Text>
-          <Text>Price: {item.price}</Text>
-        </View>
+        </Text>
       );
     })
   );
@@ -59,10 +57,12 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-  buttonContainer: {
+  onpress: {
     shadowRadius: 2,
-    marginBottom: 32,
-    paddingHorizontal: 24,
+    marginTop: 32,
+    borderWidth: 2,
+    borderColor: 'white',
+    borderRadius: 6,
   },
   body: {
     display: 'flex',

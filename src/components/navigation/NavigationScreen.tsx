@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
@@ -14,12 +14,7 @@ interface Props {
   navigation: any;
 }
 
-export const NavigationScreen: React.FC<Props> = ({
-  navigation,
-  route,
-}: Props) => {
-  const {itemId, otherParam, user} = route.params;
-
+export const NavigationScreen: React.FC = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -29,36 +24,8 @@ export const NavigationScreen: React.FC<Props> = ({
         <Header />
         <View style={styles.body}>
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Navigation Page</Text>
-            <Text style={styles.sectionTitle}>itemId: {itemId}</Text>
-            <Text style={styles.sectionTitle}>otherParam: {otherParam}</Text>
-            <Text style={styles.sectionTitle}>name: {user}</Text>
-          </View>
-          <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>See Your Changes</Text>
             <Text style={styles.sectionDescription}> Your Navigation </Text>
-          </View>
-          <View style={styles.buttonClick}>
-            <Button
-              title="Go to Navigation... again"
-              onPress={() =>
-                navigation.push('Navigation', {
-                  itemId: Math.floor(Math.random() * 100),
-                })
-              }
-            />
-            <View style={styles.buttonClick}>
-              <Button
-                title="Go to Home"
-                onPress={() => navigation.navigate('Home')}
-              />
-            </View>
-            <View style={styles.buttonClick}>
-              <Button
-                title="Go back Home"
-                onPress={() => navigation.goBack()}
-              />
-            </View>
           </View>
         </View>
       </ScrollView>

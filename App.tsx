@@ -13,7 +13,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/components/home/HomeScreen';
-import NavigationScreen from './src/components/navigation/NavigationScreen';
 import {Alert, Button} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './src/store';
@@ -61,14 +60,6 @@ const App = () => {
                   color="#fff"
                 />
               ),
-            }}
-          />
-          <Stack.Screen
-            name="Navigation"
-            component={NavigationScreen}
-            options={{
-              title: 'Navigation Page',
-              headerTintColor: '#fff',
             }}
           />
           <Stack.Screen
