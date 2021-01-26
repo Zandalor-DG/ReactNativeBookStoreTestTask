@@ -1,28 +1,33 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {allBooks} from '../../store/bookStoreStore/thunkBookStore';
-import {FilterState} from '../filterComponent/filterReducer';
+// import {FilterState} from '../filterComponent/filterReducer';
 import BooksAll from './BooksAll';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import NavigationScreen from '../navigation/NavigationScreen';
 import ShoppingCart from './ShoppingCart';
 import Notifications from '../notifications/Notifications';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
 
-interface Props {
-  route: {
-    params?: {
-      post: string;
-      filterParams: FilterState;
-    };
-  };
-  navigation: any;
-}
+const Tab = createMaterialBottomTabNavigator();
 
-const Tab = createBottomTabNavigator();
-
-const HomeScreen: React.FC<Props> = ({route}: Props) => {
+const HomeScreen: React.FC = () => {
   //const value = route.params?.filterParams;
   const dispatch = useDispatch();
+  const nav = useNavigation();
+  useEffect(() => {
+    nav.setOptions({
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="account"
+          style={{marginRight: 20}}
+          size={26}
+          onPress={() => nav.navigate('AccountUser')}
+        />
+      ),
+    });
+  });
 
   // const [filterState, filterDispatch] = useReducer(
   //   filterReducer,
@@ -37,17 +42,33 @@ const HomeScreen: React.FC<Props> = ({route}: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (route.params?.post) {
-    }
-  }, [route.params]);
-
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      initialRouteName="Book All"
+      activeColor="#e91e63"
+      style={{backgroundColor: 'tomato'}}>
       <Tab.Screen name="Navigation" component={NavigationScreen} />
-      <Tab.Screen name="AllBooks" component={BooksAll} />
+      <Tab.Screen
+        name="Book All"
+        component={BooksAll}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
       <Tab.Screen name="ShoppingCart" component={ShoppingCart} />
-      <Tab.Screen name="Notifications" component={Notifications} />
+      <Tab.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };

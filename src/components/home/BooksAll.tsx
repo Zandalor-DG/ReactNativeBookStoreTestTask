@@ -1,5 +1,6 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useSelector} from 'react-redux';
@@ -7,14 +8,11 @@ import {baseURL} from '../../api/axios';
 // import {baseURL} from '../../api/axios';
 import {StateReduxType} from '../../store/reducers';
 
-interface Props {
-  navigation: any;
-}
-
-const BooksAll: React.FC<Props> = ({navigation}: Props) => {
+const BooksAll: React.FC = () => {
   const books = useSelector(
     (state: StateReduxType) => state.bookStoreState.books,
   );
+  const navigation = useNavigation();
 
   const content = !books ? (
     <View>

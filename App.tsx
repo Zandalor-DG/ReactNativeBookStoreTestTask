@@ -17,6 +17,7 @@ import {Alert, Button} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './src/store';
 import Book from './src/components/home/Book';
+import AccountUser from './src/components/accountUser/AccountUser';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ const App = () => {
               />
             ),
           }}>
+          <Stack.Screen name="AccountUser" component={AccountUser} />
           <Stack.Screen
             name="Home"
             component={HomeScreen}
@@ -53,13 +55,6 @@ const App = () => {
               // headerStyle: {
               //   backgroundColor: '#f4511e',
               // },
-              headerRight: () => (
-                <Button
-                  onPress={() => Alert.alert('This is a home!')}
-                  title="navi"
-                  color="#fff"
-                />
-              ),
             }}
           />
           <Stack.Screen
