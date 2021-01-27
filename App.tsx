@@ -10,10 +10,9 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useRoute} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/components/home/HomeScreen';
-import {Alert, Button} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './src/store';
 import Book from './src/components/home/Book';
@@ -34,17 +33,10 @@ const App = () => {
             headerStyle: {
               backgroundColor: '#0f0d0d',
             },
-            headerTintColor: '#fff',
+            headerTintColor: '#606061',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
-            headerRight: () => (
-              <Button
-                onPress={() => Alert.alert('This is a button!')}
-                title="Info"
-                color="#fff"
-              />
-            ),
           }}>
           <Stack.Screen name="AccountUser" component={AccountUser} />
           <Stack.Screen
@@ -54,7 +46,7 @@ const App = () => {
               title: 'Home page',
               // headerStyle: {
               //   backgroundColor: '#f4511e',
-              // },
+              // },посмотреть как передавать в хедер цвет ниэниъ кнопок
             }}
           />
           <Stack.Screen

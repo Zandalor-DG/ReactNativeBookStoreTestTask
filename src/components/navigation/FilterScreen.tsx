@@ -17,7 +17,6 @@ interface Props {
 export const NavigationScreen: React.FC = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
