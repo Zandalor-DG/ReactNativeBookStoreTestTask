@@ -39,7 +39,7 @@ export const allBooks = ({
   }
 };
 
-export const bookInfo = (id: string) => async (
+export const bookInfo = (id: number) => async (
   dispatch: AppDispatch,
 ): Promise<void> => {
   try {

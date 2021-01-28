@@ -10,13 +10,14 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import {NavigationContainer, useRoute} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/components/home/HomeScreen';
 import {Provider} from 'react-redux';
 import store from './src/store';
 import Book from './src/components/home/Book';
 import AccountUser from './src/components/accountUser/AccountUser';
+import FilterScreen from './src/components/navigation/FilterScreen';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ const App = () => {
               fontWeight: 'bold',
             },
           }}>
+          <Stack.Screen name="Filter" component={FilterScreen} />
           <Stack.Screen name="AccountUser" component={AccountUser} />
           <Stack.Screen
             name="Home"

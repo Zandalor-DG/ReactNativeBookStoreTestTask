@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
@@ -14,7 +14,7 @@ interface Props {
   navigation: any;
 }
 
-export const NavigationScreen: React.FC = () => {
+export const FilterScreen: React.FC = () => {
   return (
     <>
       <ScrollView
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NavigationScreen;
+export default FilterScreen;

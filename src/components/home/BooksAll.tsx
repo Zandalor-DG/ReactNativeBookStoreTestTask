@@ -1,27 +1,27 @@
 // import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Grid} from '@ant-design/react-native';
-import {Alert, Image, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {Card, WingBlank} from '@ant-design/react-native';
+import {Alert, Button, Image, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {baseURL} from '../../api/axios';
 import {StateReduxType} from '../../store/reducers';
+import {useNavigation} from '@react-navigation/native';
+import {bookInfo} from '../../store/bookStoreStore/thunkBookStore';
+import HomeHeader from './HomeHeader';
 
 const BooksAll: React.FC = () => {
   const books = useSelector(
     (state: StateReduxType) => state.bookStoreState.books,
   );
-  const data = books?.map((item) => ({
-    icon: (
-      <Image
-        source={{uri: baseURL + item.File.path_name}}
-        style={{width: 110, height: 160}}
-      />
-    ),
-    //icon: baseURL + item.File.path_name,
-    text: item.name,
-  }));
-  //const navigation = useNavigation();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const openBook = (id: number) => {
+    dispatch(bookInfo(id));
+    navigation.navigate('Book');
+  };
+
   //navigation.navigate('Book')
 
   const content = !books ? (
@@ -29,11 +29,70 @@ const BooksAll: React.FC = () => {
       <Text>Not Data</Text>
     </View>
   ) : (
-    <Grid
-      data={data}
-      columnNum={2}
-      onPress={(_el, index) => Alert.alert(`${index}`)}
-    />
+    books.map((item) => (
+      <WingBlank style={{marginTop: 10, marginBottom: 10}} size="lg">
+        <Card>
+          <Card.Header
+            title={`${item.name} by ${item.Author.name}`}
+            thumbStyle={{width: 30, height: 30}}
+            thumb={
+              <Image
+                source={require('../../asset/arrow-right-bold-circle-outline.png')}
+                //style={{width: 110, height: 150, margin: 20}}
+              />
+            }
+            //extra={`by ${item.Author.name}`}
+          />
+          <Card.Body>
+            <View style={{display: 'flex', flexDirection: 'row'}}>
+              <View style={{height: 155}}>
+                <Image
+                  source={{uri: baseURL + item.File.path_name}}
+                  style={{width: 110, height: 150, margin: 20}}
+                />
+                {/* <Text style={{marginLeft: 16}}>Card Content</Text> */}
+              </View>
+              <Text style={{width: 180, height: 150, margin: 20}}>
+                {item.description}
+              </Text>
+              <View />
+            </View>
+          </Card.Body>
+          <Card.Footer
+            style={{marginBottom: 10}}
+            content={
+              <View
+                style={{
+                  width: 120,
+                }}>
+                <Button
+                  onPress={() => openBook(item.id)}
+                  title={'info'}
+                  color="#843cc7"
+                />
+              </View>
+            }
+            extra={
+              <View
+                style={{
+                  width: 140,
+                }}>
+                <Button
+                  color="#843cc7"
+                  onPress={() => Alert.alert('your buy')}
+                  title={`in cart ${item.price}$`}
+                />
+              </View>
+            }
+          />
+        </Card>
+      </WingBlank>
+    ))
+    // <Grid
+    //   data={data}
+    //   columnNum={2}
+    //   onPress={(_el, index) => Alert.alert(`${index}`)}
+    // />
   );
 
   return (
@@ -45,19 +104,11 @@ const BooksAll: React.FC = () => {
         backgroundColor="#843cc7"
         //barStyle="light-content"
       /> */}
-      <View style={styles.sectionContainer}>{content}</View>
+      <HomeHeader />
+      {content}
+      {/* <View style={styles.sectionContainer}>{content}</View> */}
     </ScrollView>
   );
 };
 
 export default BooksAll;
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 24,
-  },
-});

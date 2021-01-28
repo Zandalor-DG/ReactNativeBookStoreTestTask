@@ -68,7 +68,7 @@ export const getAllBooks = async ({
   return data;
 };
 
-export const getBook = async (id: string): Promise<PropsGetBook> => {
+export const getBook = async (id: number): Promise<PropsGetBook> => {
   const res = await axios.get('/book/getbook', {
     params: {id},
   });
