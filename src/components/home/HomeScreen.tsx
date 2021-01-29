@@ -55,19 +55,8 @@ const HomeScreen: React.FC = () => {
 
   return (
     <Tab.Navigator initialRouteName="Book All" shifting activeColor="white">
-      {/* <Tab.Screen
-        name="Filter"
-        component={FilterScreen}
-        options={{
-          tabBarLabel: 'Filter',
-          tabBarColor: '#c73c81',
-          tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="filter" color={color} size={26} />
-          ),
-        }}
-      /> */}
       <Tab.Screen
-        name="Book All"
+        name="Home"
         component={BooksAll}
         options={{
           tabBarLabel: 'Home',

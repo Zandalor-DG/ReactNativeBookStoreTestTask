@@ -14,12 +14,12 @@ const BooksAll: React.FC = () => {
   const books = useSelector(
     (state: StateReduxType) => state.bookStoreState.books,
   );
-  const navigation = useNavigation();
+  const nav = useNavigation();
   const dispatch = useDispatch();
 
   const openBook = (id: number) => {
     dispatch(bookInfo(id));
-    navigation.navigate('Book');
+    nav.navigate('Book');
   };
 
   //navigation.navigate('Book')
@@ -30,7 +30,10 @@ const BooksAll: React.FC = () => {
     </View>
   ) : (
     books.map((item) => (
-      <WingBlank style={{marginTop: 10, marginBottom: 10}} size="lg">
+      <WingBlank
+        key={item.id}
+        style={{marginTop: 10, marginBottom: 10}}
+        size="lg">
         <Card>
           <Card.Header
             title={`${item.name} by ${item.Author.name}`}

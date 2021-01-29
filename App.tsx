@@ -18,6 +18,10 @@ import store from './src/store';
 import Book from './src/components/home/Book';
 import AccountUser from './src/components/accountUser/AccountUser';
 import FilterScreen from './src/components/navigation/FilterScreen';
+import {
+  setHomeScreenHeaderColor,
+  setHomeScreenHeaderTitle,
+} from './src/utils/setHomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -44,12 +48,12 @@ const App = () => {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{
-              title: 'Home page',
-              // headerStyle: {
-              //   backgroundColor: '#f4511e',
-              // },посмотреть как передавать в хедер цвет ниэниъ кнопок
-            }}
+            options={({route}) => ({
+              headerTitle: setHomeScreenHeaderTitle(route),
+              headerStyle: {
+                backgroundColor: setHomeScreenHeaderColor(route),
+              },
+            })}
           />
           <Stack.Screen
             name="Book"
