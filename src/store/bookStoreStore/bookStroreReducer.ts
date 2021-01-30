@@ -51,8 +51,8 @@ const bookStoreReducer = (
     case ActionTypeBookStore.SetAllFilteringOptions: {
       return {...state, allFilteringOptions: {...action.allFilteringOptions}};
     }
-    case ActionTypeBookStore.SetTotalPage: {
-      return {...state, totalPage: action.totalPage};
+    case ActionTypeBookStore.SetCountData: {
+      return {...state, countData: action.countData};
     }
     case ActionTypeBookStore.SetPageSize: {
       return {...state, pageSize: action.pageSize};

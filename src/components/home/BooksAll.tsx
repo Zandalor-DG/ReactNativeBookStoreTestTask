@@ -9,6 +9,7 @@ import {StateReduxType} from '../../store/reducers';
 import {useNavigation} from '@react-navigation/native';
 import {bookInfo} from '../../store/bookStoreStore/thunkBookStore';
 import HomeHeader from './HomeHeader';
+import PaginationComponent from './PaginationComponent';
 
 const BooksAll: React.FC = () => {
   const books = useSelector(
@@ -91,25 +92,13 @@ const BooksAll: React.FC = () => {
         </Card>
       </WingBlank>
     ))
-    // <Grid
-    //   data={data}
-    //   columnNum={2}
-    //   onPress={(_el, index) => Alert.alert(`${index}`)}
-    // />
   );
 
   return (
-    <ScrollView
-      //style={styles.scrollView}
-      contentInsetAdjustmentBehavior="automatic">
-      {/* <StatusBar
-        translucent
-        backgroundColor="#843cc7"
-        //barStyle="light-content"
-      /> */}
+    <ScrollView contentInsetAdjustmentBehavior="automatic">
       <HomeHeader />
       {content}
-      {/* <View style={styles.sectionContainer}>{content}</View> */}
+      <PaginationComponent />
     </ScrollView>
   );
 };

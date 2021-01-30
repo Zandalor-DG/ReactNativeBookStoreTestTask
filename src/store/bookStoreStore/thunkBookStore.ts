@@ -17,7 +17,7 @@ import {
   setBookState,
   SetBookStoreState as setBookStoreState,
   setErrorBookStore,
-  setTotalPage,
+  setCountData,
 } from './actionCreatedBookStore';
 
 export interface INewComment {
@@ -33,7 +33,7 @@ export const allBooks = ({
   try {
     const data = await getAllBooks({page, pageSize, filterState});
     dispatch(setBookStoreState(data.rows));
-    dispatch(setTotalPage(data.count));
+    dispatch(setCountData(data.count));
   } catch (err) {
     dispatch(setErrorBookStore(err.message));
   }

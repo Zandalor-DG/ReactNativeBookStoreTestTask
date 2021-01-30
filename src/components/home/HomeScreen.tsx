@@ -38,7 +38,7 @@ const HomeScreen: React.FC = () => {
       ),
     });
 
-    dispatch(allBooks({page: 1, pageSize: 8}));
+    dispatch(allBooks({page: 1, pageSize: 6}));
   });
 
   // const changeColorHeader =() => {

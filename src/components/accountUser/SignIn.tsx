@@ -32,10 +32,7 @@ const SignIn: React.FC<{}> = () => {
           </InputItem>
 
           <List.Item>
-            <Button
-              style={{borderColor: '#3cc753', backgroundColor: '#3cc753'}}
-              onPress={() => {}}
-              type="primary">
+            <Button style={styles.button} onPress={() => {}} type="primary">
               Sign in
             </Button>
           </List.Item>
@@ -60,4 +57,5 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
+  button: {borderColor: '#3cc753', backgroundColor: '#3cc753'},
 });

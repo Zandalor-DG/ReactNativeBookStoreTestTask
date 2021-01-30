@@ -6,7 +6,7 @@ import {
 } from '../../models/BookStore/bookStoreData';
 
 export enum ActionTypeBookStore {
-  SetTotalPage = 'SetTotalPage',
+  SetCountData = 'SetCountData',
   SetError = 'SetError',
   SetPageSize = 'SetPageSize',
   SetBookStoreState = 'SetBookStoreState',
@@ -16,9 +16,9 @@ export enum ActionTypeBookStore {
   AddOrUpdateRate = 'AddOrUpdateRate',
 }
 
-export type ActionSetTotalPage = {
-  type: ActionTypeBookStore.SetTotalPage;
-  totalPage: number;
+export type ActionSetCountData = {
+  type: ActionTypeBookStore.SetCountData;
+  countData: number;
 };
 
 export type ActionSetPageSize = {
@@ -57,7 +57,7 @@ export type ActionSetErrorBookStore = {
 };
 
 export type ActionBookStore =
-  | ActionSetTotalPage
+  | ActionSetCountData
   | ActionSetPageSize
   | ActionSetBookStoreState
   | ActionSetAllFilteringOptions
