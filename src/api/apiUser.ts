@@ -1,9 +1,8 @@
 import axios from './axios';
-import {InputsLogin} from '../components/header/account/LoginAccount';
-import {InputsRegister} from '../components/header/account/RegisterAccount';
 import {UserData} from '../models/User/userData';
 import {PropsUpdateUserData} from '../store/userStore/thunkUser';
-import {onChangePassword} from '../components/header/profilePage/ChangePassword';
+import {ISignIn} from '../components/accountUser/SignIn';
+import AsyncStorage from '@react-native-community/async-storage';
 
 type UserDataAndToken = {
   token: {accessToken: string; refreshToken: string};
@@ -11,23 +10,23 @@ type UserDataAndToken = {
 };
 
 export const postLoginUser = async (
-  loginDataUser: InputsLogin,
+  loginDataUser: ISignIn,
 ): Promise<UserData> => {
   const res = await axios.post('/account/signin', loginDataUser);
   const data: UserDataAndToken = res.data;
-  localStorage.setItem('token', data.token.accessToken);
-  localStorage.setItem('refreshToken', data.token.refreshToken);
+  AsyncStorage.setItem('token', data.token.accessToken);
+  AsyncStorage.setItem('refreshToken', data.token.refreshToken);
   return data.userData;
 };
 
-export const postRegisterUser = async (
-  registerDataUser: InputsRegister,
-): Promise<void> => {
-  const res = await axios.post('/account/signup', registerDataUser);
-  const data: UserDataAndToken = res.data;
-  localStorage.setItem('token', data.token.accessToken);
-  localStorage.setItem('refreshToken', data.token.refreshToken);
-};
+// export const postRegisterUser = async (
+//   registerDataUser: InputsRegister,
+// ): Promise<void> => {
+//   const res = await axios.post('/account/signup', registerDataUser);
+//   const data: UserDataAndToken = res.data;
+//   localStorage.setItem('token', data.token.accessToken);
+//   localStorage.setItem('refreshToken', data.token.refreshToken);
+// };
 
 export const putProfilePage = async (
   user: PropsUpdateUserData,
@@ -40,7 +39,7 @@ export const putProfilePage = async (
 export const getLoginByToken = async (): Promise<UserData> => {
   const res = await axios.get('/account/signinbytoken');
   const data: UserDataAndToken = res.data;
-  localStorage.setItem('token', data.token.accessToken);
+  AsyncStorage.setItem('token', data.token.accessToken);
   return data.userData;
 };
 
@@ -54,15 +53,15 @@ export const putUploadAvatar = async (formData: FormData): Promise<string> => {
   return avatarUrl;
 };
 
-export const postChangePassword = async (
-  {oldPassword, newPassword}: onChangePassword,
-  user: UserData | null,
-): Promise<UserData> => {
-  const res = await axios.put('/user/putuser', {
-    oldPassword,
-    newPassword,
-    user,
-  });
-  const data: UserData = res.data.userData;
-  return data;
-};
+// export const postChangePassword = async (
+//   {oldPassword, newPassword}: onChangePassword,
+//   user: UserData | null,
+// ): Promise<UserData> => {
+//   const res = await axios.put('/user/putuser', {
+//     oldPassword,
+//     newPassword,
+//     user,
+//   });
+//   const data: UserData = res.data.userData;
+//   return data;
+// };

@@ -1,7 +1,7 @@
 // import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Card, WingBlank} from '@ant-design/react-native';
-import {Alert, Button, Image, Text, View} from 'react-native';
+import {Alert, Button, Image, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {baseURL} from '../../api/axios';
@@ -31,14 +31,11 @@ const BooksAll: React.FC = () => {
     </View>
   ) : (
     books.map((item) => (
-      <WingBlank
-        key={item.id}
-        style={{marginTop: 10, marginBottom: 10}}
-        size="lg">
+      <WingBlank key={item.id} style={styles.allBook__wrapper} size="lg">
         <Card>
           <Card.Header
             title={`${item.name} by ${item.Author.name}`}
-            thumbStyle={{width: 30, height: 30}}
+            thumbStyle={styles.allBook__cardHeader}
             thumb={
               <Image
                 source={require('../../asset/arrow-right-bold-circle-outline.png')}
@@ -48,27 +45,22 @@ const BooksAll: React.FC = () => {
             //extra={`by ${item.Author.name}`}
           />
           <Card.Body>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-              <View style={{height: 155}}>
+            <View style={styles.view__image}>
+              <View style={styles.image__wrapper}>
                 <Image
                   source={{uri: baseURL + item.File.path_name}}
-                  style={{width: 110, height: 150, margin: 20}}
+                  style={styles.booksAll__image}
                 />
                 {/* <Text style={{marginLeft: 16}}>Card Content</Text> */}
               </View>
-              <Text style={{width: 180, height: 150, margin: 20}}>
-                {item.description}
-              </Text>
+              <Text style={styles.bookCard__text}>{item.description}</Text>
               <View />
             </View>
           </Card.Body>
           <Card.Footer
-            style={{marginBottom: 10}}
+            style={styles.bookCardFooter__wrapper}
             content={
-              <View
-                style={{
-                  width: 120,
-                }}>
+              <View style={styles.bookCartFooter__view}>
                 <Button
                   onPress={() => openBook(item.id)}
                   title={'info'}
@@ -77,10 +69,7 @@ const BooksAll: React.FC = () => {
               </View>
             }
             extra={
-              <View
-                style={{
-                  width: 140,
-                }}>
+              <View style={styles.button__view}>
                 <Button
                   color="#843cc7"
                   onPress={() => Alert.alert('your buy')}
@@ -104,3 +93,15 @@ const BooksAll: React.FC = () => {
 };
 
 export default BooksAll;
+
+const styles = StyleSheet.create({
+  allBook__wrapper: {marginTop: 10, marginBottom: 10},
+  allBook__cardHeader: {width: 30, height: 30},
+  view__image: {display: 'flex', flexDirection: 'row'},
+  image__wrapper: {height: 155},
+  booksAll__image: {width: 110, height: 150, margin: 20},
+  bookCard__text: {width: 180, height: 150, margin: 20},
+  bookCardFooter__wrapper: {marginBottom: 10},
+  bookCartFooter__view: {width: 120},
+  button__view: {width: 140},
+});

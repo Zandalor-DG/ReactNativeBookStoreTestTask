@@ -22,6 +22,10 @@ import {
   setHomeScreenHeaderColor,
   setHomeScreenHeaderTitle,
 } from './src/utils/setHomeScreen';
+import {
+  setAccountScreenHeaderColor,
+  setAccountScreenHeaderTitle,
+} from './src/utils/setAccountScreen';
 
 const Stack = createStackNavigator();
 
@@ -31,9 +35,6 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Home"
-          // options={({navigation, route}: any) => ({
-          //   headerTitle: (props: any) => <LogoTitle {...props} />,
-          // })}
           screenOptions={{
             headerStyle: {
               backgroundColor: '#0f0d0d',
@@ -44,7 +45,20 @@ const App = () => {
             },
           }}>
           <Stack.Screen name="Filter" component={FilterScreen} />
-          <Stack.Screen name="AccountUser" component={AccountUser} />
+          <Stack.Screen
+            name="AccountUser"
+            component={AccountUser}
+            options={({route}) => ({
+              headerTitle: setAccountScreenHeaderTitle(route),
+              headerStyle: {
+                backgroundColor: setAccountScreenHeaderColor(route),
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            })}
+          />
           <Stack.Screen
             name="Home"
             component={HomeScreen}
@@ -52,6 +66,10 @@ const App = () => {
               headerTitle: setHomeScreenHeaderTitle(route),
               headerStyle: {
                 backgroundColor: setHomeScreenHeaderColor(route),
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
               },
             })}
           />

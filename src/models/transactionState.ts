@@ -1,6 +1,6 @@
-import { Transaction } from './TransactionStore/transaction';
+import {Transaction} from './TransactionStore/transaction';
 
 export interface TransactionState {
-    transactions: Transaction[] | null;
-    error?: string;
+  transactions: Transaction[] | null;
+  error?: string;
 }

@@ -6,7 +6,7 @@ import {
   postAddOneItemCart,
   postRemoveItemCount,
 } from '../../api/apiShoppingCard';
-import {AppDispatch} from '../../store copy/reducers';
+import {AppDispatch} from '../reducers';
 import {
   setAddItemCounter,
   setAddToCart,

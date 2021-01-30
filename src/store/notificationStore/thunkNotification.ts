@@ -3,7 +3,7 @@ import {
   getAllNotifications,
   updateOneItem,
 } from '../../api/apiNotification';
-import {AppDispatch} from '../../store copy/reducers';
+import {AppDispatch} from '../reducers';
 import {
   addAllNotifications,
   deleteAllNotifications,

@@ -1,3 +1,3 @@
-import { TransactionState } from '../models/transactionState';
+import {TransactionState} from '../models/transactionState';
 
-export const transactionInitialState: TransactionState = { transactions: null };
+export const transactionInitialState: TransactionState = {transactions: null};

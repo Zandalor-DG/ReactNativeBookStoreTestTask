@@ -1,7 +1,7 @@
-import { ProductModelInCard as ProductModelInCart } from './ShoppingCardStore/productModelInCard';
+import {ProductModelInCard as ProductModelInCart} from './ShoppingCardStore/productModelInCard';
 
 export interface ShoppingCartState {
-    productInCart?: ProductModelInCart[];
-    totalPrice: number;
-    error?: string;
+  productInCart?: ProductModelInCart[];
+  totalPrice: number;
+  error?: string;
 }

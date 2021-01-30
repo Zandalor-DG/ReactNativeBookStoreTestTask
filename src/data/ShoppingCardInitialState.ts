@@ -1,5 +1,5 @@
-import { ShoppingCartState } from '../models/shoppingCartState';
+import {ShoppingCartState} from '../models/shoppingCartState';
 
 export const shoppingCardInitialState: ShoppingCartState = {
-    totalPrice: 0,
+  totalPrice: 0,
 };

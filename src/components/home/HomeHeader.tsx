@@ -1,4 +1,3 @@
-import {Flex} from '@ant-design/react-native';
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 

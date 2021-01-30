@@ -23,14 +23,14 @@ const HomeScreen: React.FC = () => {
         <View style={styles.wrapperHeaderRight}>
           <MaterialCommunityIcons
             name="filter"
-            style={{marginRight: 20, color: '#606061'}}
+            style={styles.materialIcons}
             size={26}
             onPress={() => nav.navigate('Filter')}
           />
 
           <MaterialCommunityIcons
             name="account"
-            style={{marginRight: 20, color: '#606061'}}
+            style={styles.materialIcons}
             size={26}
             onPress={() => nav.navigate('AccountUser')}
           />
@@ -105,4 +105,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   },
+  materialIcons: {marginRight: 20, color: '#606061'},
 });

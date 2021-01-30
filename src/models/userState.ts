@@ -1,8 +1,8 @@
-import { UserData } from './User/userData';
+import {UserData} from './User/userData';
 
 export type UserState = {
-    user: UserData | null;
-    isInitialize: boolean;
-    isOpenModal: boolean;
-    error?: string;
+  user: UserData | null;
+  isInitialize: boolean;
+  isOpenModal: boolean;
+  error?: string;
 };

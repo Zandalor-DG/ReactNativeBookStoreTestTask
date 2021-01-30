@@ -1,6 +1,6 @@
-import { NotificationState } from '../models/notificationState';
+import {NotificationState} from '../models/notificationState';
 
 export const notificationsInitialState: NotificationState = {
-    notifications: null,
-    openNotification: null,
+  notifications: null,
+  openNotification: null,
 };

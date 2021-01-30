@@ -1,19 +1,20 @@
-import { UserState } from '../models/userState';
+import {UserState} from '../models/userState';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const getInitialState = (): UserState => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        return {
-            user: null,
-            isInitialize: true,
-            isOpenModal: false,
-        };
-    }
+  const token = AsyncStorage.getItem('token');
+  if (!token) {
     return {
-        user: null,
-        isInitialize: false,
-        isOpenModal: false,
+      user: null,
+      isInitialize: true,
+      isOpenModal: false,
     };
+  }
+  return {
+    user: null,
+    isInitialize: false,
+    isOpenModal: false,
+  };
 };
 
 export const userInitialState = getInitialState();

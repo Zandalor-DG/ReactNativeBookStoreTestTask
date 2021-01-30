@@ -2,7 +2,7 @@ import {
   getAllTransactionItem,
   postSendTransaction,
 } from '../../api/apiTransaction';
-import {AppDispatch} from '../../store copy/reducers';
+import {AppDispatch} from '../reducers';
 import {
   setErrorTransaction,
   setTransactionItem,

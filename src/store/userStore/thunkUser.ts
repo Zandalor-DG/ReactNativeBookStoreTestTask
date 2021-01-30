@@ -2,19 +2,14 @@ import {getAllNotifications} from '../../api/apiNotification';
 import {getAllItemsCart} from '../../api/apiShoppingCard';
 import {
   getLoginByToken,
-  postChangePassword,
   postLoginUser,
-  postRegisterUser,
   putProfilePage,
   putUploadAvatar,
 } from '../../api/apiUser';
-import {InputsLogin} from '../../components/header/account/LoginAccount';
-import {InputsRegister} from '../../components/header/account/RegisterAccount';
-import {onChangePassword} from '../../components/header/profilePage/ChangePassword';
-import {UserData} from '../../models/User/userData';
+import {ISignIn} from '../../components/accountUser/SignIn';
 import {userRole} from '../../models/User/userRoleEnum';
 import {addAllNotifications} from '../notificationStore/actionCreatedNotification';
-import {AppDispatch} from '../../store copy/reducers';
+import {AppDispatch} from '../reducers';
 import {setAddToCart} from '../shoppingCardStore/actionCreatedShoppingCard';
 import {
   setAuthorizedUser,
@@ -33,7 +28,7 @@ export interface PropsUpdateUserData {
   roleId?: userRole;
 }
 
-export const loginUser = ({email, password}: InputsLogin) => async (
+export const loginUser = ({email, password}: ISignIn) => async (
   dispatch: AppDispatch,
 ): Promise<boolean> => {
   try {
@@ -50,24 +45,24 @@ export const loginUser = ({email, password}: InputsLogin) => async (
   }
 };
 
-export const registerUser = ({
-  fullName,
-  email,
-  password,
-  dob,
-  roleId,
-}: InputsRegister) => async (dispatch: AppDispatch): Promise<boolean> => {
-  try {
-    await postRegisterUser({fullName, email, password, dob, roleId});
-    const user = await getLoginByToken();
-    dispatch(setAuthorizedUser(user));
+// export const registerUser = ({
+//   fullName,
+//   email,
+//   password,
+//   dob,
+//   roleId,
+// }: InputsRegister) => async (dispatch: AppDispatch): Promise<boolean> => {
+//   try {
+//     await postRegisterUser({fullName, email, password, dob, roleId});
+//     const user = await getLoginByToken();
+//     dispatch(setAuthorizedUser(user));
 
-    return true;
-  } catch (err) {
-    dispatch(setErrorUser(err.message));
-    return false;
-  }
-};
+//     return true;
+//   } catch (err) {
+//     dispatch(setErrorUser(err.message));
+//     return false;
+//   }
+// };
 
 export const updateUserData = ({
   fullName,
@@ -98,17 +93,17 @@ export const loginUserByToken = () => async (
   }
 };
 
-export const changePassword = (
-  {oldPassword, newPassword}: onChangePassword,
-  user: UserData | null,
-) => async (dispatch: AppDispatch): Promise<void> => {
-  try {
-    const userData = await postChangePassword({oldPassword, newPassword}, user);
-    dispatch(updateProfilePage(userData));
-  } catch (err) {
-    dispatch(setErrorUser(err.message));
-  }
-};
+// export const changePassword = (
+//   {oldPassword, newPassword}: onChangePassword,
+//   user: UserData | null,
+// ) => async (dispatch: AppDispatch): Promise<void> => {
+//   try {
+//     const userData = await postChangePassword({oldPassword, newPassword}, user);
+//     dispatch(updateProfilePage(userData));
+//   } catch (err) {
+//     dispatch(setErrorUser(err.message));
+//   }
+// };
 
 export const uploadAvatar = (formData: FormData) => async (
   dispatch: AppDispatch,
