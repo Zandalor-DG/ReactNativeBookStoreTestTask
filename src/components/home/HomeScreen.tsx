@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {allBooks} from '../../store/bookStoreStore/thunkBookStore';
+import {loginUserByToken} from '../../store/userStore/thunkUser';
 // import {FilterState} from '../filterComponent/filterReducer';
 import BooksAll from './BooksAll';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
@@ -37,15 +38,9 @@ const HomeScreen: React.FC = () => {
         </View>
       ),
     });
-
+    dispatch(loginUserByToken());
     dispatch(allBooks({page: 1, pageSize: 6}));
   });
-
-  // const changeColorHeader =() => {
-  //   nav.navigate('Home', {
-  //     color: ,
-  //   })
-  // }
 
   // const [filterState, filterDispatch] = useReducer(
   //   filterReducer,

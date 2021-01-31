@@ -24,8 +24,8 @@ export const postLoginUser = async (
 // ): Promise<void> => {
 //   const res = await axios.post('/account/signup', registerDataUser);
 //   const data: UserDataAndToken = res.data;
-//   localStorage.setItem('token', data.token.accessToken);
-//   localStorage.setItem('refreshToken', data.token.refreshToken);
+//   AsyncStorage.setItem('token', data.token.accessToken);
+//   AsyncStorage.setItem('refreshToken', data.token.refreshToken);
 // };
 
 export const putProfilePage = async (

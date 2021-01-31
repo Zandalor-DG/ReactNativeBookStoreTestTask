@@ -17,7 +17,7 @@ import {Provider} from 'react-redux';
 import store from './src/store';
 import Book from './src/components/home/Book';
 import AccountUser from './src/components/accountUser/AccountUser';
-import FilterScreen from './src/components/navigation/FilterScreen';
+import FilterScreen from './src/components/filterScreen/FilterScreen';
 import {
   setHomeScreenHeaderColor,
   setHomeScreenHeaderTitle,
