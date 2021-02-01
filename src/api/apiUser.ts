@@ -14,8 +14,8 @@ export const postLoginUser = async (
 ): Promise<UserData> => {
   const res = await axios.post('/account/signin', loginDataUser);
   const data: UserDataAndToken = res.data;
-  AsyncStorage.setItem('token', data.token.accessToken);
-  AsyncStorage.setItem('refreshToken', data.token.refreshToken);
+  await AsyncStorage.setItem('token', data.token.accessToken);
+  await AsyncStorage.setItem('refreshToken', data.token.refreshToken);
   return data.userData;
 };
 
@@ -24,8 +24,8 @@ export const postLoginUser = async (
 // ): Promise<void> => {
 //   const res = await axios.post('/account/signup', registerDataUser);
 //   const data: UserDataAndToken = res.data;
-//   AsyncStorage.setItem('token', data.token.accessToken);
-//   AsyncStorage.setItem('refreshToken', data.token.refreshToken);
+//   await AsyncStorage.setItem('token', data.token.accessToken);
+//   await AsyncStorage.setItem('refreshToken', data.token.refreshToken);
 // };
 
 export const putProfilePage = async (
@@ -39,7 +39,7 @@ export const putProfilePage = async (
 export const getLoginByToken = async (): Promise<UserData> => {
   const res = await axios.get('/account/signinbytoken');
   const data: UserDataAndToken = res.data;
-  AsyncStorage.setItem('token', data.token.accessToken);
+  await AsyncStorage.setItem('token', data.token.accessToken);
   return data.userData;
 };
 

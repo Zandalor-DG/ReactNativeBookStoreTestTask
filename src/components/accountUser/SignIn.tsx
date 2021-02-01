@@ -16,6 +16,8 @@ const SignIn: React.FC<{}> = () => {
 
   // eslint-disable-next-line no-shadow
   const onFinish = ({email, password}: ISignIn) => {
+    console.log(email, password);
+
     dispatch(loginUser({email, password}));
   };
 
@@ -48,9 +50,7 @@ const SignIn: React.FC<{}> = () => {
             <Button
               style={styles.button}
               // eslint-disable-next-line no-shadow
-              onPress={({email, password}: ISignIn) =>
-                onFinish({email, password})
-              }
+              onPress={() => onFinish({email, password})}
               type="primary">
               Sign in
             </Button>

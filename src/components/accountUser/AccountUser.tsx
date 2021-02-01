@@ -11,8 +11,9 @@ const Tab = createMaterialBottomTabNavigator();
 
 const AccountUser: React.FC = () => {
   const isInitialized = useSelector(
-    (state: StateReduxType) => state.userState.isInitialize,
+    (state: StateReduxType) => state.userState.user,
   );
+  console.log(isInitialized);
 
   const isAuthorize = !isInitialized ? (
     <>

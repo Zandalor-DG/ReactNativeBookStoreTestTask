@@ -65,8 +65,6 @@ export const getAllBooks = async ({
     },
   });
   const data: propsAllBooks = res.data.booksResponse;
-  console.log(data.count);
-
   return data;
 };
 

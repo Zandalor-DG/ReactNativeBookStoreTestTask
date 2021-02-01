@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Drawer, List, WhiteSpace} from '@ant-design/react-native';
 import FilterComponent from './FilterComponent';
 

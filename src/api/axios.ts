@@ -7,13 +7,21 @@ const instance = axios.create({
   baseURL,
   headers: {'Content-Type': 'application/json', 'x-access-token': ''},
 });
+const asyncToken = async () => {
+  try {
+    return await AsyncStorage.getItem('token');
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 instance.interceptors.request.use((config) => {
-  const token = AsyncStorage.getItem('token');
+  const token = asyncToken();
+  console.log('axios -->', token);
   if (!token) {
     return config;
   }
-  config.headers['x-access-token'] = token;
+  config.headers['x-access-token'] = asyncToken();
   return config;
 });
 

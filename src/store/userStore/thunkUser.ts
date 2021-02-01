@@ -33,6 +33,8 @@ export const loginUser = ({email, password}: ISignIn) => async (
 ): Promise<boolean> => {
   try {
     const user = await postLoginUser({email, password});
+    console.log('login');
+
     dispatch(setAuthorizedUser(user));
     const data = await getAllItemsCart();
     dispatch(setAddToCart(data));

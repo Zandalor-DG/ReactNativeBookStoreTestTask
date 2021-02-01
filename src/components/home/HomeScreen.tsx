@@ -10,6 +10,7 @@ import Notifications from '../notifications/Notifications';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -22,19 +23,20 @@ const HomeScreen: React.FC = () => {
     nav.setOptions({
       headerRight: () => (
         <View style={styles.wrapperHeaderRight}>
-          <MaterialCommunityIcons
-            name="filter"
-            style={styles.materialIcons}
-            size={26}
-            onPress={() => nav.navigate('Filter')}
-          />
-
-          <MaterialCommunityIcons
-            name="account"
-            style={styles.materialIcons}
-            size={26}
-            onPress={() => nav.navigate('AccountUser')}
-          />
+          <TouchableOpacity onPress={() => nav.navigate('Filter')}>
+            <MaterialCommunityIcons
+              name="filter"
+              style={styles.materialIcons}
+              size={26}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => nav.navigate('AccountUser')}>
+            <MaterialCommunityIcons
+              name="account"
+              style={styles.materialIcons}
+              size={26}
+            />
+          </TouchableOpacity>
         </View>
       ),
     });
