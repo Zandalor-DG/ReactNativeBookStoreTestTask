@@ -3,10 +3,12 @@ import {getAllItemsCart} from '../../api/apiShoppingCard';
 import {
   getLoginByToken,
   postLoginUser,
+  postRegisterUser,
   putProfilePage,
   putUploadAvatar,
 } from '../../api/apiUser';
 import {ISignIn} from '../../components/accountUser/SignIn';
+import {ISignUp} from '../../components/accountUser/SignUp';
 import {userRole} from '../../models/User/userRoleEnum';
 import {addAllNotifications} from '../notificationStore/actionCreatedNotification';
 import {AppDispatch} from '../reducers';
@@ -21,10 +23,10 @@ import {
 } from './actionCreatedUser';
 
 export interface PropsUpdateUserData {
-  id: number;
+  id?: number;
   fullName: string;
   email: string;
-  dob: Date;
+  dob?: Date;
   roleId?: userRole;
 }
 
@@ -33,8 +35,6 @@ export const loginUser = ({email, password}: ISignIn) => async (
 ): Promise<boolean> => {
   try {
     const user = await postLoginUser({email, password});
-    console.log('login');
-
     dispatch(setAuthorizedUser(user));
     const data = await getAllItemsCart();
     dispatch(setAddToCart(data));
@@ -47,24 +47,24 @@ export const loginUser = ({email, password}: ISignIn) => async (
   }
 };
 
-// export const registerUser = ({
-//   fullName,
-//   email,
-//   password,
-//   dob,
-//   roleId,
-// }: InputsRegister) => async (dispatch: AppDispatch): Promise<boolean> => {
-//   try {
-//     await postRegisterUser({fullName, email, password, dob, roleId});
-//     const user = await getLoginByToken();
-//     dispatch(setAuthorizedUser(user));
+export const registerUser = ({
+  fullName,
+  email,
+  password,
+  dob,
+  roleId,
+}: ISignUp) => async (dispatch: AppDispatch): Promise<boolean> => {
+  try {
+    await postRegisterUser({fullName, email, password, dob, roleId});
+    const user = await getLoginByToken();
+    dispatch(setAuthorizedUser(user));
 
-//     return true;
-//   } catch (err) {
-//     dispatch(setErrorUser(err.message));
-//     return false;
-//   }
-// };
+    return true;
+  } catch (err) {
+    dispatch(setErrorUser(err.message));
+    return false;
+  }
+};
 
 export const updateUserData = ({
   fullName,
@@ -86,6 +86,8 @@ export const loginUserByToken = () => async (
   try {
     const user = await getLoginByToken();
     dispatch(setInitialUser(user));
+    console.log(user);
+
     const data = await getAllItemsCart();
     dispatch(setAddToCart(data));
     const notifications = await getAllNotifications();

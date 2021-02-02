@@ -3,6 +3,7 @@ import {UserData} from '../models/User/userData';
 import {PropsUpdateUserData} from '../store/userStore/thunkUser';
 import {ISignIn} from '../components/accountUser/SignIn';
 import AsyncStorage from '@react-native-community/async-storage';
+import {ISignUp} from '../components/accountUser/SignUp';
 
 type UserDataAndToken = {
   token: {accessToken: string; refreshToken: string};
@@ -19,14 +20,14 @@ export const postLoginUser = async (
   return data.userData;
 };
 
-// export const postRegisterUser = async (
-//   registerDataUser: InputsRegister,
-// ): Promise<void> => {
-//   const res = await axios.post('/account/signup', registerDataUser);
-//   const data: UserDataAndToken = res.data;
-//   await AsyncStorage.setItem('token', data.token.accessToken);
-//   await AsyncStorage.setItem('refreshToken', data.token.refreshToken);
-// };
+export const postRegisterUser = async (
+  registerDataUser: ISignUp,
+): Promise<void> => {
+  const res = await axios.post('/account/signup', registerDataUser);
+  const data: UserDataAndToken = res.data;
+  await AsyncStorage.setItem('token', data.token.accessToken);
+  await AsyncStorage.setItem('refreshToken', data.token.refreshToken);
+};
 
 export const putProfilePage = async (
   user: PropsUpdateUserData,

@@ -16,8 +16,6 @@ const SignIn: React.FC<{}> = () => {
 
   // eslint-disable-next-line no-shadow
   const onFinish = ({email, password}: ISignIn) => {
-    console.log(email, password);
-
     dispatch(loginUser({email, password}));
   };
 

@@ -1,11 +1,12 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {StyleSheet} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../store/userStore/actionCreatedUser';
+import ChangeDataUser from './ChangeDataUser';
 
 const ProfileScreen: React.FC = () => {
   const nav = useNavigation();
@@ -28,7 +29,6 @@ const ProfileScreen: React.FC = () => {
             name="account-minus"
             style={styles.materialIcons}
             size={26}
-            // onPress={() => nav.navigate('')}
           />
         </TouchableOpacity>
       ),
@@ -36,9 +36,9 @@ const ProfileScreen: React.FC = () => {
   });
 
   return (
-    <View>
-      <Text>Profile Page</Text>
-    </View>
+    <ScrollView>
+      <ChangeDataUser />
+    </ScrollView>
   );
 };
 

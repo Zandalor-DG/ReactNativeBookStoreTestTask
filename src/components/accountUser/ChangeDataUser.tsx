@@ -9,37 +9,31 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import en_US from 'antd-mobile/lib/locale-provider/en_US';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useDispatch} from 'react-redux';
-import {registerUser} from '../../store/userStore/thunkUser';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateUserData} from '../../store/userStore/thunkUser';
+import {StateReduxType} from '../../store/reducers';
 
-export interface ISignUp {
-  fullName: string;
-  email: string;
-  password: string;
-  dob?: Date;
-  roleId: number;
-}
-
-const SignUp: React.FC = () => {
+const ChangeDataUser: React.FC = () => {
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
   const [dob, setDob] = useState<Date | undefined>(undefined);
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const id = useSelector((state: StateReduxType) => state.userState.user?.id);
 
   const onChange = (value: Date) => {
     setDob(value);
   };
 
-  const onRegistration = () => {
-    dispatch(registerUser({email, fullName, password, dob, roleId: 3}));
+  const onChangeUserData = () => {
+    dispatch(updateUserData({dob, email, fullName, id}));
   };
 
   return (
     <Provider locale={en_US}>
       <View style={styles.wrapper}>
         <View style={styles.content}>
-          <List renderHeader={'Registration'}>
+          <List renderHeader={'Change data user'}>
             <InputItem
               clear
               error={'' ? true : false}
@@ -84,9 +78,9 @@ const SignUp: React.FC = () => {
             </View>
 
             <List.Item>
-              <TouchableOpacity onPress={onRegistration}>
+              <TouchableOpacity onPress={onChangeUserData}>
                 <Button style={styles.button} type="primary">
-                  Sign up
+                  Change data
                 </Button>
               </TouchableOpacity>
             </List.Item>
@@ -97,7 +91,7 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default ChangeDataUser;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -111,5 +105,5 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
-  button: {borderColor: '#c5c73c', backgroundColor: '#c5c73c'},
+  button: {borderColor: '#153e8a', backgroundColor: '#153e8a'},
 });

@@ -7,7 +7,7 @@ const instance = axios.create({
   baseURL,
   headers: {'Content-Type': 'application/json', 'x-access-token': ''},
 });
-const asyncToken = async () => {
+export const asyncToken = async () => {
   try {
     return await AsyncStorage.getItem('token');
   } catch (err) {
@@ -15,13 +15,12 @@ const asyncToken = async () => {
   }
 };
 
-instance.interceptors.request.use((config) => {
-  const token = asyncToken();
-  console.log('axios -->', token);
+instance.interceptors.request.use(async (config) => {
+  const token = await asyncToken();
   if (!token) {
     return config;
   }
-  config.headers['x-access-token'] = asyncToken();
+  config.headers['x-access-token'] = token;
   return config;
 });
 

@@ -3,7 +3,7 @@ import {getFocusedRouteNameFromRoute, Route} from '@react-navigation/native';
 export function setAccountScreenHeaderTitle(
   route: Route<'AccountUser', object | undefined>,
 ) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Profile';
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'SignIn';
 
   switch (routeName) {
     case 'SignIn':
@@ -12,13 +12,15 @@ export function setAccountScreenHeaderTitle(
       return 'Sign up';
     case 'Profile':
       return 'Profile';
+    case 'ChangePassword':
+      return 'Change password';
   }
 }
 
 export function setAccountScreenHeaderColor(
   route: Route<'AccountUser', object | undefined>,
 ) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Profile';
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'SignIn';
 
   switch (routeName) {
     case 'SignIn':
@@ -27,5 +29,7 @@ export function setAccountScreenHeaderColor(
       return '#c5c73c';
     case 'Profile':
       return '#153e8a';
+    case 'ChangePassword':
+      return '#96434e';
   }
 }
