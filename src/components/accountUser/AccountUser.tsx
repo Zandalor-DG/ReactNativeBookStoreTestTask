@@ -53,7 +53,6 @@ const AccountUser: React.FC = () => {
   ) : (
     <>
       <Tab.Navigator initialRouteName="Profile" shifting activeColor="white">
-        <ProfileScreen />
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
