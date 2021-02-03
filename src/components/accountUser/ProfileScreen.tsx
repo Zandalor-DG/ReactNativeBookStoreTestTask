@@ -6,6 +6,7 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../store/userStore/actionCreatedUser';
+import ChangeAvatarUser from './ChangeAvatarUser';
 import ChangeDataUser from './ChangeDataUser';
 
 const ProfileScreen: React.FC = () => {
@@ -37,6 +38,7 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <ScrollView>
+      <ChangeAvatarUser />
       <ChangeDataUser />
     </ScrollView>
   );
