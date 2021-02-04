@@ -2,6 +2,8 @@ import {getAllNotifications} from '../../api/apiNotification';
 import {getAllItemsCart} from '../../api/apiShoppingCard';
 import {
   getLoginByToken,
+  onChangePassword,
+  postChangePassword,
   postLoginUser,
   postRegisterUser,
   putProfilePage,
@@ -9,6 +11,7 @@ import {
 } from '../../api/apiUser';
 import {ISignIn} from '../../components/accountUser/SignIn';
 import {ISignUp} from '../../components/accountUser/SignUp';
+import {UserData} from '../../models/User/userData';
 import {userRole} from '../../models/User/userRoleEnum';
 import {addAllNotifications} from '../notificationStore/actionCreatedNotification';
 import {AppDispatch} from '../reducers';
@@ -97,17 +100,17 @@ export const loginUserByToken = () => async (
   }
 };
 
-// export const changePassword = (
-//   {oldPassword, newPassword}: onChangePassword,
-//   user: UserData | null,
-// ) => async (dispatch: AppDispatch): Promise<void> => {
-//   try {
-//     const userData = await postChangePassword({oldPassword, newPassword}, user);
-//     dispatch(updateProfilePage(userData));
-//   } catch (err) {
-//     dispatch(setErrorUser(err.message));
-//   }
-// };
+export const changePassword = (
+  {oldPassword, newPassword}: onChangePassword,
+  user: UserData | null,
+) => async (dispatch: AppDispatch): Promise<void> => {
+  try {
+    const userData = await postChangePassword({oldPassword, newPassword}, user);
+    dispatch(updateProfilePage(userData));
+  } catch (err) {
+    dispatch(setErrorUser(err.message));
+  }
+};
 
 export const uploadAvatar = (formData: FormData) => async (
   dispatch: AppDispatch,

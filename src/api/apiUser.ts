@@ -9,6 +9,10 @@ type UserDataAndToken = {
   token: {accessToken: string; refreshToken: string};
   userData: UserData;
 };
+export type onChangePassword = {
+  oldPassword: string;
+  newPassword: string;
+};
 
 export const postLoginUser = async (
   loginDataUser: ISignIn,
@@ -54,15 +58,15 @@ export const putUploadAvatar = async (formData: FormData): Promise<string> => {
   return avatarUrl;
 };
 
-// export const postChangePassword = async (
-//   {oldPassword, newPassword}: onChangePassword,
-//   user: UserData | null,
-// ): Promise<UserData> => {
-//   const res = await axios.put('/user/putuser', {
-//     oldPassword,
-//     newPassword,
-//     user,
-//   });
-//   const data: UserData = res.data.userData;
-//   return data;
-// };
+export const postChangePassword = async (
+  {oldPassword, newPassword}: onChangePassword,
+  user: UserData | null,
+): Promise<UserData> => {
+  const res = await axios.put('/user/putuser', {
+    oldPassword,
+    newPassword,
+    user,
+  });
+  const data: UserData = res.data.userData;
+  return data;
+};

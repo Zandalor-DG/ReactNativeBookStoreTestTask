@@ -17,9 +17,9 @@ const ChangeDataUser: React.FC = () => {
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
   const [dob, setDob] = useState<Date | undefined>(undefined);
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const id = useSelector((state: StateReduxType) => state.userState.user?.id);
+  const user = useSelector((state: StateReduxType) => state.userState.user);
+  const id = user?.id;
 
   const onChange = (value: Date) => {
     setDob(value);
@@ -41,6 +41,7 @@ const ChangeDataUser: React.FC = () => {
               onChange={(value) => {
                 setFullName(value);
               }}
+              defaultValue={user?.fullName}
               placeholder="your email pls">
               Second name:
             </InputItem>
@@ -51,18 +52,9 @@ const ChangeDataUser: React.FC = () => {
               onChange={(value) => {
                 setEmail(value);
               }}
+              defaultValue={user?.email}
               placeholder="your email pls">
               Email:
-            </InputItem>
-            <InputItem
-              clear
-              type="password"
-              value={password}
-              onChange={(value) => {
-                setPassword(value);
-              }}
-              placeholder="password">
-              Pass:
             </InputItem>
             <View style={styles.content}>
               <DatePicker
@@ -72,6 +64,7 @@ const ChangeDataUser: React.FC = () => {
                 minDate={new Date(1940, 1, 1)}
                 maxDate={new Date()}
                 onChange={onChange}
+                date={user?.dob}
                 format="YYYY-MM-DD">
                 <List.Item arrow="horizontal">Select Date</List.Item>
               </DatePicker>

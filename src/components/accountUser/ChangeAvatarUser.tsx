@@ -20,12 +20,13 @@ import {
   launchImageLibrary,
 } from 'react-native-image-picker';
 import {useDispatch, useSelector} from 'react-redux';
+import {baseURL} from '../../api/axios';
 import {StateReduxType} from '../../store/reducers';
 import {uploadAvatar} from '../../store/userStore/thunkUser';
 
 const ChangeAvatarUser: React.FC<{}> = () => {
   const [filePath, setFilePath] = useState<ImagePickerResponse>({});
-  const [turnOffDisableButton, setTurnOffDisableButton] = useState(true);
+  const [isUploadAvatar, setIsUploadAvatar] = useState(true);
   const user = useSelector((state: StateReduxType) => state.userState.user);
   const dispatch = useDispatch();
 
@@ -103,16 +104,9 @@ const ChangeAvatarUser: React.FC<{}> = () => {
           Alert.alert(response.errorMessage || 'error response');
           return;
         }
-        console.log('base64 -> ', response.base64);
-        console.log('uri -> ', response.uri);
-        console.log('width -> ', response.width);
-        console.log('height -> ', response.height);
-        console.log('fileSize -> ', response.fileSize);
-        console.log('type -> ', response.type);
-        console.log('fileName -> ', response.fileName);
         setFilePath(response);
         uploadAvatarToServer();
-        setTurnOffDisableButton(false);
+        setIsUploadAvatar(false);
       });
     }
   };
@@ -140,21 +134,18 @@ const ChangeAvatarUser: React.FC<{}> = () => {
         Alert.alert(response.errorMessage || 'error response');
         return;
       }
-      console.log('base64 -> ', response.base64);
-      console.log('uri -> ', response.uri);
-      console.log('width -> ', response.width);
-      console.log('height -> ', response.height);
-      console.log('fileSize -> ', response.fileSize);
-      console.log('type -> ', response.type);
-      console.log('fileName -> ', response.fileName);
       setFilePath(response);
-      setTurnOffDisableButton(false);
+      setIsUploadAvatar(false);
     });
   };
 
   const uploadAvatarToServer = () => {
     const formData = new FormData();
-    formData.append('filedata', filePath.type);
+    formData.append('filedata', {
+      name: filePath.fileName || 'avatar',
+      type: filePath.type,
+      uri: filePath.uri ? filePath.uri.replace('file:/', '') : '',
+    });
     dispatch(uploadAvatar(formData));
   };
 
@@ -164,13 +155,10 @@ const ChangeAvatarUser: React.FC<{}> = () => {
         {user ? `Profile page ${user.fullName}` : "it's error"}
       </Text>
       <View style={styles.container}>
-        {/* <Image
-          source={{
-            uri: 'data:image/jpeg;base64,' + filePath.data,
-          }}
+        <Image
+          source={{uri: filePath.uri || `${baseURL}/${user?.avatar}`}}
           style={styles.imageStyle}
-        /> */}
-        <Image source={{uri: filePath.uri}} style={styles.imageStyle} />
+        />
         <Text style={styles.textStyle}>{filePath.uri}</Text>
         <TouchableOpacity
           activeOpacity={0.5}
@@ -178,28 +166,16 @@ const ChangeAvatarUser: React.FC<{}> = () => {
           onPress={() => captureImage('photo')}>
           <Text style={styles.textStyle}>Launch Camera for Image</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => captureImage('video')}>
-          <Text style={styles.textStyle}>Launch Camera for Video</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.buttonStyle}
           onPress={() => chooseFile('photo')}>
           <Text style={styles.textStyle}>Choose Image</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => chooseFile('video')}>
-          <Text style={styles.textStyle}>Choose Video</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.buttonStyle}
-          disabled={turnOffDisableButton}
+          disabled={isUploadAvatar}
           onPress={uploadAvatarToServer}>
           <Text style={styles.textStyle}>Upload avatar</Text>
         </TouchableOpacity>
@@ -233,7 +209,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#153e8a',
+    borderRadius: 5,
     padding: 5,
     marginVertical: 10,
     width: 250,

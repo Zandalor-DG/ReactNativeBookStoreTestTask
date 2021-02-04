@@ -1,9 +1,27 @@
-import {InputItem, List} from '@ant-design/react-native';
+import {Button, InputItem, List} from '@ant-design/react-native';
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const ChangePassword: React.FC<{}> = () => {
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
+  const [errorNewPassword, setErrorNewPassword] = useState(false);
+
+  const onChangePassword = () => {
+    if (newPassword !== confirmPassword) {
+      setErrorConfirmPassword(true);
+      Alert.alert('bad confirm password');
+      return;
+    }
+    if (password === newPassword) {
+      setErrorNewPassword(true);
+      Alert.alert('new password copy old password');
+      return;
+    }
+  };
 
   return (
     <>
@@ -18,8 +36,38 @@ const ChangePassword: React.FC<{}> = () => {
                 setPassword(value);
               }}
               placeholder="password">
-              Pass:
+              Old password:
             </InputItem>
+            <InputItem
+              clear
+              error={errorNewPassword}
+              type="password"
+              value={newPassword}
+              onChange={(value) => {
+                setNewPassword(value);
+              }}
+              placeholder="password">
+              New pass:
+            </InputItem>
+            <InputItem
+              clear
+              error={errorConfirmPassword}
+              type="password"
+              value={confirmPassword}
+              onChange={(value) => {
+                setConfirmPassword(value);
+              }}
+              placeholder="password">
+              Confirm password:
+            </InputItem>
+
+            <List.Item>
+              <TouchableOpacity onPress={onChangePassword}>
+                <Button style={styles.button} type="primary">
+                  Change data
+                </Button>
+              </TouchableOpacity>
+            </List.Item>
           </List>
         </View>
       </View>
