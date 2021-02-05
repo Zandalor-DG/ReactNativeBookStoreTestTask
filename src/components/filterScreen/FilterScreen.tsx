@@ -1,58 +1,23 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Button, Drawer, List, WhiteSpace} from '@ant-design/react-native';
+import {Drawer, List, WhiteSpace} from '@ant-design/react-native';
 import FilterComponent from './FilterComponent';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  firstElement: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  wrapperButton: {flex: 1, marginTop: 114, padding: 8},
-});
+interface IFiletScreen {
+  stylesMaterialIcons: {
+    marginRight: number;
+    color: string;
+  };
+}
 
-const FilterScreen = () => {
+const FilterScreen: React.FC<IFiletScreen> = ({stylesMaterialIcons}) => {
   const onOpenChange = (isOpen: boolean) => {
     console.log('Drawer', isOpen.toString());
   };
   let drawer: any;
 
-  // const itemArr = Array.apply(null, Array(20))
-  //   .map(function (_, i) {
-  //     return i;
-  //   })
-  //   .map((_i, index) => {
-  //     if (index === 0) {
-  //       return (
-  //         <List.Item
-  //           key={index}
-  //           thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-  //           multipleLine>
-  //           <View style={styles.firstElement}>
-  //             <Text>Categories - {index}</Text>
-  //             <Button
-  //               type="primary"
-  //               size="small"
-  //               onPress={() => drawer.closeDrawer()}>
-  //               close drawer
-  //             </Button>
-  //           </View>
-  //         </List.Item>
-  //       );
-  //     }
-  //     return (
-  //       <List.Item
-  //         key={index}
-  //         thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png">
-  //         <Text>Categories - {index}</Text>
-  //       </List.Item>
-  //     );
-  //   });
-  // Todo: https://github.com/DefinitelyTyped/DefinitelyTyped
   const sidebar = (
     <ScrollView style={[styles.container]}>
       <List>
@@ -69,9 +34,13 @@ const FilterScreen = () => {
       onOpenChange={onOpenChange}
       drawerBackgroundColor="#ccc">
       <View style={styles.wrapperButton}>
-        <Button onPress={() => drawer && drawer.openDrawer()}>
-          Open drawer
-        </Button>
+        <TouchableOpacity onPress={() => drawer && drawer.openDrawer()}>
+          <MaterialCommunityIcons
+            name="filter"
+            style={stylesMaterialIcons}
+            size={26}
+          />
+        </TouchableOpacity>
         <WhiteSpace />
       </View>
     </Drawer>
@@ -79,3 +48,15 @@ const FilterScreen = () => {
 };
 
 export default FilterScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  firstElement: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  wrapperButton: {flex: 1, marginTop: 114, padding: 8},
+});

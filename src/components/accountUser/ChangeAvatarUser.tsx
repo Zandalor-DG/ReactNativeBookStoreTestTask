@@ -15,9 +15,12 @@ import {
 // Import Image Picker
 // import ImagePicker from 'react-native-image-picker';
 import {
+  CameraOptions,
+  ImageLibraryOptions,
   ImagePickerResponse,
   launchCamera,
   launchImageLibrary,
+  MediaType,
 } from 'react-native-image-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import {baseURL} from '../../api/axios';
@@ -63,7 +66,6 @@ const ChangeAvatarUser: React.FC<{}> = () => {
             buttonPositive: '',
           },
         );
-        // If WRITE_EXTERNAL_STORAGE Permission is granted
         return granted === PermissionsAndroid.RESULTS.GRANTED;
       } catch (err) {
         console.warn(err);
@@ -75,8 +77,8 @@ const ChangeAvatarUser: React.FC<{}> = () => {
     }
   };
 
-  const captureImage = async (type: any) => {
-    let options = {
+  const captureImage = async (type: MediaType) => {
+    let options: CameraOptions = {
       mediaType: type,
       maxWidth: 300,
       maxHeight: 550,
@@ -111,8 +113,8 @@ const ChangeAvatarUser: React.FC<{}> = () => {
     }
   };
 
-  const chooseFile = (type: any) => {
-    let options = {
+  const chooseFile = (type: MediaType) => {
+    let options: ImageLibraryOptions = {
       mediaType: type,
       maxWidth: 300,
       maxHeight: 550,

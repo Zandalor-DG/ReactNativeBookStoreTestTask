@@ -9,8 +9,10 @@ import ShoppingCart from './ShoppingCart';
 import Notifications from '../notifications/Notifications';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Drawer, List, WhiteSpace} from '@ant-design/react-native';
+import FilterComponent from '../filterScreen/FilterComponent';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -19,17 +21,42 @@ const HomeScreen: React.FC = () => {
   const dispatch = useDispatch();
   const nav = useNavigation();
 
+  const onOpenChange = (isOpen: boolean) => {
+    console.log('Drawer', isOpen.toString());
+  };
+
+  const sidebar = (
+    <ScrollView style={[styles.container]}>
+      <List>
+        <FilterComponent />
+      </List>
+    </ScrollView>
+  );
+
   useEffect(() => {
+    let drawer: any;
+
     nav.setOptions({
       headerRight: () => (
         <View style={styles.wrapperHeaderRight}>
-          <TouchableOpacity onPress={() => nav.navigate('Filter')}>
-            <MaterialCommunityIcons
-              name="filter"
-              style={styles.materialIcons}
-              size={26}
-            />
-          </TouchableOpacity>
+          <Drawer
+            sidebar={sidebar}
+            position="left"
+            open={false}
+            drawerRef={(el) => (drawer = el)}
+            onOpenChange={onOpenChange}
+            drawerBackgroundColor="#ccc">
+            <View style={styles.wrapperButton}>
+              <TouchableOpacity onPress={() => drawer && drawer.openDrawer()}>
+                <MaterialCommunityIcons
+                  name="filter"
+                  style={styles.materialIcons}
+                  size={26}
+                />
+              </TouchableOpacity>
+              <WhiteSpace />
+            </View>
+          </Drawer>
           <TouchableOpacity onPress={() => nav.navigate('AccountUser')}>
             <MaterialCommunityIcons
               name="account"
@@ -42,7 +69,7 @@ const HomeScreen: React.FC = () => {
     });
     dispatch(loginUserByToken());
     dispatch(allBooks({page: 1, pageSize: 6}));
-  });
+  }, [dispatch, nav, sidebar]);
 
   // const [filterState, filterDispatch] = useReducer(
   //   filterReducer,
@@ -103,4 +130,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   materialIcons: {marginRight: 20, color: '#606061'},
+  container: {
+    flex: 1,
+  },
+  firstElement: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  wrapperButton: {flex: 1, marginTop: 114, padding: 8},
 });
