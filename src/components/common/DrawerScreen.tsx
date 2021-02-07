@@ -3,25 +3,8 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import FilterComponent from '../filterScreen/FilterComponent';
-import DrawerLayout from '@bang88/react-native-drawer-layout';
-import {useDispatch} from 'react-redux';
-import {
-  openDrawer,
-  setDrawler,
-} from '../../store/bookStoreStore/actionCreatedBookStore';
 
 const DrawerScreen: React.FC<{}> = ({children}) => {
-  // const dispatch = useDispatch();
-  // const onOpenChange = (isOpen: boolean) => {
-  //   dispatch(openDrawer(isOpen));
-  //   console.log('Drawer', isOpen.toString());
-  // };
-
-  // const onSetDrawer = (el: DrawerLayout | null) => {
-  //   console.log('el', el);
-  //   dispatch(setDrawler(el));
-  // };
-
   const sidebar = (
     <ScrollView style={[styles.container]}>
       <List>

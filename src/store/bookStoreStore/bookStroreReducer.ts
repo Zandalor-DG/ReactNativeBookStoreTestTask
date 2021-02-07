@@ -57,9 +57,9 @@ const bookStoreReducer = (
     case ActionTypeBookStore.SetPageSize: {
       return {...state, pageSize: action.pageSize};
     }
-    case ActionTypeBookStore.SetDrawer: {
-      return {...state, drawer: action.drawer};
-    }
+    // case ActionTypeBookStore.SetDrawer: {
+    //   return {...state, drawer: action.drawer};
+    // }
     case ActionTypeBookStore.OpenDrawer: {
       return {...state, isOpenDrawer: action.isOpenDrawer};
     }
