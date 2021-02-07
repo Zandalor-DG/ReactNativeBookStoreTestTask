@@ -8,6 +8,5 @@ export interface BookStoreState {
   countData: number;
   allFilteringOptions: AllFilteringOptions;
   book?: PropsGetBook;
-  isOpenDrawer: boolean;
   error?: string;
 }

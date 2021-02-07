@@ -13,8 +13,6 @@ export enum ActionTypeBookStore {
   SetAllFilteringOptions = 'SetAllFilteringOptions',
   SetBookState = 'SetBookState',
   AddComment = 'AddComment',
-  SetDrawer = 'SetDrawer',
-  OpenDrawer = 'OpenDrawer',
   AddOrUpdateRate = 'AddOrUpdateRate',
 }
 
@@ -53,11 +51,6 @@ export type ActionSetBookStoreState = {
   books: BookStoreData[];
 };
 
-export type ActionSetOpenDrawer = {
-  type: ActionTypeBookStore.OpenDrawer;
-  isOpenDrawer: boolean;
-};
-
 export type ActionSetErrorBookStore = {
   type: ActionTypeBookStore.SetError;
   error: string;
@@ -71,6 +64,4 @@ export type ActionBookStore =
   | ActionSetErrorBookStore
   | ActionSetBookState
   | ActionAddComment
-  // | ActionSetDrawer
-  | ActionSetOpenDrawer
   | ActionAddOrUpdateRate;

@@ -43,11 +43,6 @@ export const addOrUpdateRate = (rate: number): ActionAddOrUpdateRate => ({
   rate,
 });
 
-export const openDrawer = (isOpenDrawer: boolean) => ({
-  type: ActionTypeBookStore.SetDrawer,
-  isOpenDrawer,
-});
-
 export const setBookState = (data: PropsGetBook): ActionSetBookState => ({
   type: ActionTypeBookStore.SetBookState,
   data,

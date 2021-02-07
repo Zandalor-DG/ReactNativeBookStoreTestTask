@@ -11,8 +11,6 @@ const bookStoreInitialState: BookStoreState = {
   },
   pageSize: 6,
   countData: 10,
-  drawer: null,
-  isOpenDrawer: false,
 };
 
 export default bookStoreInitialState;
