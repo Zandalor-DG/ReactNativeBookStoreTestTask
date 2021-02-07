@@ -12,10 +12,10 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from './src/components/home/HomeScreen';
+import HomeContainer from './src/components/home/HomeContainer';
 import {Provider} from 'react-redux';
 import store from './src/store';
-import Book from './src/components/home/Book';
+import Book from './src/components/books/Book';
 import AccountUser from './src/components/accountUser/AccountUser';
 import FilterScreen from './src/components/filterScreen/FilterScreen';
 import {
@@ -61,7 +61,7 @@ const App = () => {
           />
           <Stack.Screen
             name="Home"
-            component={HomeScreen}
+            component={HomeContainer}
             options={({route}) => ({
               headerTitle: setHomeScreenHeaderTitle(route),
               headerStyle: {

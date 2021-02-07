@@ -1,17 +1,13 @@
-// import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Card, WingBlank} from '@ant-design/react-native';
 import {Alert, Button, Image, StyleSheet, Text, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {baseURL} from '../../api/axios';
 import {StateReduxType} from '../../store/reducers';
 import {useNavigation} from '@react-navigation/native';
 import {bookInfo} from '../../store/bookStoreStore/thunkBookStore';
-import HomeHeader from './HomeHeader';
-import PaginationComponent from './PaginationComponent';
 
-const BooksAll: React.FC = () => {
+const AllBooks: React.FC<{}> = () => {
   const books = useSelector(
     (state: StateReduxType) => state.bookStoreState.books,
   );
@@ -22,8 +18,6 @@ const BooksAll: React.FC = () => {
     dispatch(bookInfo(id));
     nav.navigate('Book');
   };
-
-  //navigation.navigate('Book')
 
   const content = !books ? (
     <View>
@@ -83,16 +77,10 @@ const BooksAll: React.FC = () => {
     ))
   );
 
-  return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
-      <HomeHeader />
-      {content}
-      <PaginationComponent />
-    </ScrollView>
-  );
+  return <>{content}</>;
 };
 
-export default BooksAll;
+export default AllBooks;
 
 const styles = StyleSheet.create({
   allBook__wrapper: {marginTop: 10, marginBottom: 10},

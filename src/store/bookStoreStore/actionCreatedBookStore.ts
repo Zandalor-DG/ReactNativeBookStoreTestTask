@@ -15,6 +15,7 @@ import {
   ActionSetCountData,
   ActionTypeBookStore,
 } from './actionTypesBookStore';
+import DrawerLayout from '@bang88/react-native-drawer-layout';
 
 export const setCountData = (countData: number): ActionSetCountData => ({
   type: ActionTypeBookStore.SetCountData,
@@ -41,6 +42,16 @@ export const addComment = (commentData: CommentState[]): ActionAddComment => ({
 export const addOrUpdateRate = (rate: number): ActionAddOrUpdateRate => ({
   type: ActionTypeBookStore.AddOrUpdateRate,
   rate,
+});
+
+export const setDrawler = (drawer: DrawerLayout | null) => ({
+  type: ActionTypeBookStore.SetDrawer,
+  drawer,
+});
+
+export const openDrawer = (isOpenDrawer: boolean) => ({
+  type: ActionTypeBookStore.SetDrawer,
+  isOpenDrawer,
 });
 
 export const setBookState = (data: PropsGetBook): ActionSetBookState => ({
