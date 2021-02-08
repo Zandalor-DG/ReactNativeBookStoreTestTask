@@ -8,40 +8,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
-import {StateReduxType} from '../../store/reducers';
 
 const Tab = createMaterialBottomTabNavigator();
 
 const HomeContainer: React.FC = () => {
   const nav = useNavigation();
-  const {drawer, isOpenDrawer} = useSelector(
-    (state: StateReduxType) => state.bookStoreState,
-  );
-  //const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
   useEffect(() => {
-    // const openDrawer = () => {
-    //   console.log(isOpenDrawer.toString());
-    //   if (isOpenDrawer) {
-    //     console.log('drawer open', drawer);
-    //     drawer?.openDrawer();
-    //   } else {
-    //     console.log('drawerClose', drawer);
-    //     drawer?.closeDrawer();
-    //   }
-    // };
-
     nav.setOptions({
       headerRight: () => (
         <View style={styles.wrapperHeaderRight}>
-          {/* <TouchableOpacity onPress={openDrawer}>
-            <MaterialCommunityIcons
-              name="filter"
-              style={styles.materialIcons}
-              size={26}
-            />
-          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => nav.navigate('AccountUser')}>
             <MaterialCommunityIcons
               name="account"
@@ -52,14 +28,7 @@ const HomeContainer: React.FC = () => {
         </View>
       ),
     });
-  }, [nav, isOpenDrawer, drawer]);
-  //const value = route.params?.filterParams;
-
-  // const [filterState, filterDispatch] = useReducer(
-  //   filterReducer,
-  //   value as FilterState,
-  //   getInitialFilterState,
-  // );
+  }, [nav]);
 
   return (
     <>

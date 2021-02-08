@@ -7,7 +7,6 @@ import AllBooks from '../books/AllBooks';
 import {useDispatch} from 'react-redux';
 import {loginUserByToken} from '../../store/userStore/thunkUser';
 import {allBooks} from '../../store/bookStoreStore/thunkBookStore';
-import DrawerScreen from '../common/DrawerScreen';
 
 const HomeScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,13 +17,11 @@ const HomeScreen: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <DrawerScreen>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <HomeHeader />
-        <AllBooks />
-        <PaginationComponent />
-      </ScrollView>
-    </DrawerScreen>
+    <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <HomeHeader />
+      <AllBooks />
+      <PaginationComponent />
+    </ScrollView>
   );
 };
 
