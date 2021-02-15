@@ -6,6 +6,7 @@ import {baseURL} from '../../api/axios';
 import {StateReduxType} from '../../store/reducers';
 import {useNavigation} from '@react-navigation/native';
 import {bookInfo} from '../../store/bookStoreStore/thunkBookStore';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const AllBooks: React.FC<{}> = () => {
   const books = useSelector(
@@ -27,49 +28,61 @@ const AllBooks: React.FC<{}> = () => {
     books.map((item) => (
       <WingBlank key={item.id} style={styles.allBook__wrapper} size="lg">
         <Card>
-          <Card.Header
-            title={`${item.name} by ${item.Author.name}`}
-            thumbStyle={styles.allBook__cardHeader}
-            thumb={
-              <Image
-                source={require('../../asset/arrow-right-bold-circle-outline.png')}
-                //style={{width: 110, height: 150, margin: 20}}
-              />
-            }
-            //extra={`by ${item.Author.name}`}
-          />
-          <Card.Body>
-            <View style={styles.view__image}>
-              <View style={styles.image__wrapper}>
+          <TouchableOpacity
+            // accessibilityViewIsModal={true}
+            activeOpacity={0.5}
+            onPress={() => openBook(item.id)}>
+            <Card.Header
+              title={`${item.name} by ${item.Author.name}`}
+              thumbStyle={styles.allBook__cardHeader}
+              thumb={
                 <Image
-                  source={{uri: baseURL + item.File.path_name}}
-                  style={styles.booksAll__image}
+                  source={require('../../asset/arrow-right-bold-circle-outline.png')}
+                  //style={{width: 110, height: 150, margin: 20}}
                 />
-                {/* <Text style={{marginLeft: 16}}>Card Content</Text> */}
+              }
+              //extra={`by ${item.Author.name}`}
+            />
+            <Card.Body>
+              <View style={styles.view__image}>
+                <View style={styles.image__wrapper}>
+                  <Image
+                    source={{uri: baseURL + item.File.path_name}}
+                    style={styles.booksAll__image}
+                  />
+                  {/* <Text style={{marginLeft: 16}}>Card Content</Text> */}
+                </View>
+                <Text style={styles.bookCard__text}>{item.description}</Text>
+                <View />
               </View>
-              <Text style={styles.bookCard__text}>{item.description}</Text>
-              <View />
-            </View>
-          </Card.Body>
+            </Card.Body>
+          </TouchableOpacity>
           <Card.Footer
-            style={styles.bookCardFooter__wrapper}
+            // style={styles.bookCardFooter__wrapper}
+            // content={
+            //   <View style={styles.bookCartFooter__view}>
+            //     <Button
+            //       onPress={() => openBook(item.id)}
+            //       title={'info'}
+            //       color="#843cc7"
+            //     />
+            //   </View>
+            // }
+            // extra={
+            //   <View style={styles.button__view}>
+            // <Button
+            //   color="#843cc7"
+            //   onPress={() => Alert.alert('your buy')}
+            //   title={`in cart ${item.price}$`}
+            // />
+            //   </View>
+            // }
             content={
-              <View style={styles.bookCartFooter__view}>
-                <Button
-                  onPress={() => openBook(item.id)}
-                  title={'info'}
-                  color="#843cc7"
-                />
-              </View>
-            }
-            extra={
-              <View style={styles.button__view}>
-                <Button
-                  color="#843cc7"
-                  onPress={() => Alert.alert('your buy')}
-                  title={`in cart ${item.price}$`}
-                />
-              </View>
+              <Button
+                color="#843cc7"
+                title={`in cart ${item.price}$`}
+                onPress={() => Alert.alert('your buy')}
+              />
             }
           />
         </Card>

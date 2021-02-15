@@ -1,9 +1,13 @@
 import {getFocusedRouteNameFromRoute, Route} from '@react-navigation/native';
+import {UserData} from '../models/User/userData';
 
 export function setAccountScreenHeaderTitle(
   route: Route<'AccountUser', object | undefined>,
+  user: UserData | null,
 ) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'SignIn';
+  const routeName = user
+    ? getFocusedRouteNameFromRoute(route) ?? 'Profile'
+    : getFocusedRouteNameFromRoute(route) ?? 'SignIn';
 
   switch (routeName) {
     case 'SignIn':
@@ -19,8 +23,11 @@ export function setAccountScreenHeaderTitle(
 
 export function setAccountScreenHeaderColor(
   route: Route<'AccountUser', object | undefined>,
+  user: UserData | null,
 ) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'SignIn';
+  const routeName = user
+    ? getFocusedRouteNameFromRoute(route) ?? 'Profile'
+    : getFocusedRouteNameFromRoute(route) ?? 'SignIn';
 
   switch (routeName) {
     case 'SignIn':
@@ -33,3 +40,18 @@ export function setAccountScreenHeaderColor(
       return '#96434e';
   }
 }
+
+// export function setAccountButton(
+//   route: Route<'AccountUser', object | undefined>,
+// ) {
+//   const routeName = getFocusedRouteNameFromRoute(route) ?? undefined;
+
+//   switch (routeName) {
+//     case 'Profile':
+//       return CustomButton();
+//     case 'ChangePassword':
+//       return CustomButton();
+//     default:
+//       return undefined;
+//   }
+// }

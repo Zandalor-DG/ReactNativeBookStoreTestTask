@@ -96,6 +96,7 @@ export const loginUserByToken = () => async (
     const notifications = await getAllNotifications();
     dispatch(addAllNotifications(notifications));
   } catch (err) {
+    console.log('error user', err.message);
     dispatch(setUserInitError(err.message));
   }
 };

@@ -35,6 +35,7 @@ export const allBooks = ({
     dispatch(setBookStoreState(data.rows));
     dispatch(setCountData(data.count));
   } catch (err) {
+    console.log('error allBooks', err.message);
     dispatch(setErrorBookStore(err.message));
   }
 };

@@ -7,6 +7,8 @@ import AllBooks from '../books/AllBooks';
 import {useDispatch} from 'react-redux';
 import {loginUserByToken} from '../../store/userStore/thunkUser';
 import {allBooks} from '../../store/bookStoreStore/thunkBookStore';
+// import {getAllBooks} from '../../api/apiBookStore';
+// import axios from 'axios';
 
 const HomeScreen: React.FC = () => {
   const dispatch = useDispatch();
