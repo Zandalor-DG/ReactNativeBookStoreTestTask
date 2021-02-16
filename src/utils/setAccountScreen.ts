@@ -40,18 +40,3 @@ export function setAccountScreenHeaderColor(
       return '#96434e';
   }
 }
-
-// export function setAccountButton(
-//   route: Route<'AccountUser', object | undefined>,
-// ) {
-//   const routeName = getFocusedRouteNameFromRoute(route) ?? undefined;
-
-//   switch (routeName) {
-//     case 'Profile':
-//       return CustomButton();
-//     case 'ChangePassword':
-//       return CustomButton();
-//     default:
-//       return undefined;
-//   }
-// }

@@ -25,6 +25,7 @@ import {
 import Book from './src/components/books/Book';
 import {StateReduxType} from './src/store/reducers';
 import {useSelector} from 'react-redux';
+import AccountButton from './src/components/accountUser/AccountButton';
 
 const Stack = createStackNavigator();
 
@@ -56,7 +57,7 @@ const App = () => {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          // headerRight: CustomButton,
+          headerRight: () => <AccountButton user={user} route={route} />,
         })}
       />
       <Stack.Screen
