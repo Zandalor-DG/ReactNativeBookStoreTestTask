@@ -8,11 +8,19 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useSelector} from 'react-redux';
+import {StateReduxType} from '../../store/reducers';
 
 const Tab = createMaterialBottomTabNavigator();
 
 const HomeContainer: React.FC = () => {
   const nav = useNavigation();
+  const shoppingCart = useSelector(
+    (state: StateReduxType) => state.shoppingCardState.productInCart,
+  );
+  const notification = useSelector(
+    (state: StateReduxType) => state.notificationsState.notifications,
+  );
 
   useEffect(() => {
     nav.setOptions({
@@ -49,7 +57,8 @@ const HomeContainer: React.FC = () => {
           component={ShoppingCart}
           options={{
             tabBarLabel: 'Cart',
-            tabBarBadge: 3,
+            tabBarBadge:
+              shoppingCart?.length === 0 ? undefined : shoppingCart?.length,
             tabBarColor: '#4a3cc7',
             tabBarIcon: ({color}) => (
               <MaterialCommunityIcons
@@ -66,7 +75,8 @@ const HomeContainer: React.FC = () => {
           options={{
             tabBarLabel: 'Notifications',
             tabBarColor: '#34a5c2',
-            tabBarBadge: 3,
+            tabBarBadge:
+              notification?.length === 0 ? undefined : notification?.length,
             tabBarIcon: ({color}) => (
               <MaterialCommunityIcons name="bell" color={color} size={26} />
             ),

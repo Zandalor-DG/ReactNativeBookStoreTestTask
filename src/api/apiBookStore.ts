@@ -36,7 +36,7 @@ export interface ICommentAndNotification {
 export interface IPostAddComment {
   comment: string;
   reply?: string;
-  bookId: string;
+  bookId: number;
   replyId?: number;
 }
 

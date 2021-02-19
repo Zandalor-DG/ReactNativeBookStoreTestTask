@@ -9,7 +9,7 @@
  */
 
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import FilterScreen from './src/components/filterScreen/FilterScreen';
 import AccountUser from './src/components/accountUser/AccountUser';
@@ -26,11 +26,33 @@ import Book from './src/components/books/Book';
 import {StateReduxType} from './src/store/reducers';
 import {useSelector} from 'react-redux';
 import AccountButton from './src/components/accountUser/AccountButton';
+import {Alert, BackHandler} from 'react-native';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   const user = useSelector((state: StateReduxType) => state.userState.user);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <Stack.Navigator
