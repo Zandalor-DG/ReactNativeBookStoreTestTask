@@ -1,9 +1,9 @@
-import axios from './axios';
+import AsyncStorage from '@react-native-community/async-storage';
+import {PropsSignIn} from '../components/accountUser/SignIn';
+import {ISignUp} from '../components/accountUser/SignUp';
 import {UserData} from '../models/User/userData';
 import {PropsUpdateUserData} from '../store/userStore/thunkUser';
-import {ISignIn} from '../components/accountUser/SignIn';
-import AsyncStorage from '@react-native-community/async-storage';
-import {ISignUp} from '../components/accountUser/SignUp';
+import axios from './axios';
 
 type UserDataAndToken = {
   token: {accessToken: string; refreshToken: string};
@@ -14,9 +14,7 @@ export type onChangePassword = {
   newPassword: string;
 };
 
-export const postLoginUser = async (
-  loginDataUser: ISignIn,
-): Promise<UserData> => {
+export const postLoginUser = async (loginDataUser: PropsSignIn): Promise<UserData> => {
   const res = await axios.post('/account/signin', loginDataUser);
   const data: UserDataAndToken = res.data;
   await AsyncStorage.setItem('token', data.token.accessToken);
@@ -24,18 +22,14 @@ export const postLoginUser = async (
   return data.userData;
 };
 
-export const postRegisterUser = async (
-  registerDataUser: ISignUp,
-): Promise<void> => {
+export const postRegisterUser = async (registerDataUser: ISignUp): Promise<void> => {
   const res = await axios.post('/account/signup', registerDataUser);
   const data: UserDataAndToken = res.data;
   await AsyncStorage.setItem('token', data.token.accessToken);
   await AsyncStorage.setItem('refreshToken', data.token.refreshToken);
 };
 
-export const putProfilePage = async (
-  user: PropsUpdateUserData,
-): Promise<UserData> => {
+export const putProfilePage = async (user: PropsUpdateUserData): Promise<UserData> => {
   const res = await axios.put('/user/putuser', {user});
   const data: UserData = res.data;
   return data;

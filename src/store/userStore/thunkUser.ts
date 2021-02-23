@@ -9,7 +9,7 @@ import {
   putProfilePage,
   putUploadAvatar,
 } from '../../api/apiUser';
-import {ISignIn} from '../../components/accountUser/SignIn';
+import {PropsSignIn} from '../../components/accountUser/SignIn';
 import {ISignUp} from '../../components/accountUser/SignUp';
 import {UserData} from '../../models/User/userData';
 import {userRole} from '../../models/User/userRoleEnum';
@@ -33,9 +33,7 @@ export interface PropsUpdateUserData {
   roleId?: userRole;
 }
 
-export const loginUser = ({email, password}: ISignIn) => async (
-  dispatch: AppDispatch,
-): Promise<boolean> => {
+export const loginUser = ({email, password}: PropsSignIn) => async (dispatch: AppDispatch): Promise<boolean> => {
   try {
     const user = await postLoginUser({email, password});
     dispatch(setAuthorizedUser(user));
@@ -43,6 +41,8 @@ export const loginUser = ({email, password}: ISignIn) => async (
     dispatch(setAddToCart(data));
     const notifications = await getAllNotifications();
     dispatch(addAllNotifications(notifications));
+    console.log('user', user);
+
     return true;
   } catch (err) {
     dispatch(setErrorUser(err.message));
@@ -50,15 +50,17 @@ export const loginUser = ({email, password}: ISignIn) => async (
   }
 };
 
-export const registerUser = ({
-  fullName,
-  email,
-  password,
-  dob,
-  roleId,
-}: ISignUp) => async (dispatch: AppDispatch): Promise<boolean> => {
+export const registerUser = ({fullName, email, password, dob, roleId}: ISignUp) => async (
+  dispatch: AppDispatch,
+): Promise<boolean> => {
   try {
-    await postRegisterUser({fullName, email, password, dob, roleId});
+    await postRegisterUser({
+      fullName,
+      email,
+      password,
+      dob,
+      roleId,
+    });
     const user = await getLoginByToken();
     dispatch(setAuthorizedUser(user));
 
@@ -69,23 +71,23 @@ export const registerUser = ({
   }
 };
 
-export const updateUserData = ({
-  fullName,
-  email,
-  dob,
-  id,
-}: PropsUpdateUserData) => async (dispatch: AppDispatch): Promise<void> => {
+export const updateUserData = ({fullName, email, dob, id}: PropsUpdateUserData) => async (
+  dispatch: AppDispatch,
+): Promise<void> => {
   try {
-    const user = await putProfilePage({fullName, email, dob, id});
+    const user = await putProfilePage({
+      fullName,
+      email,
+      dob,
+      id,
+    });
     dispatch(updateProfilePage(user));
   } catch (err) {
     dispatch(setErrorUser(err.message));
   }
 };
 
-export const loginUserByToken = () => async (
-  dispatch: AppDispatch,
-): Promise<void> => {
+export const loginUserByToken = () => async (dispatch: AppDispatch): Promise<void> => {
   try {
     const user = await getLoginByToken();
     dispatch(setInitialUser(user));
@@ -101,10 +103,9 @@ export const loginUserByToken = () => async (
   }
 };
 
-export const changePassword = (
-  {oldPassword, newPassword}: onChangePassword,
-  user: UserData | null,
-) => async (dispatch: AppDispatch): Promise<void> => {
+export const changePassword = ({oldPassword, newPassword}: onChangePassword, user: UserData | null) => async (
+  dispatch: AppDispatch,
+): Promise<void> => {
   try {
     const userData = await postChangePassword({oldPassword, newPassword}, user);
     dispatch(updateProfilePage(userData));
@@ -113,9 +114,7 @@ export const changePassword = (
   }
 };
 
-export const uploadAvatar = (formData: FormData) => async (
-  dispatch: AppDispatch,
-): Promise<void> => {
+export const uploadAvatar = (formData: FormData) => async (dispatch: AppDispatch): Promise<void> => {
   try {
     const avatarUrl = await putUploadAvatar(formData);
     dispatch(setUserAvatar(avatarUrl));

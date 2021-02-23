@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import {Button, InputItem, List} from '@ant-design/react-native';
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {loginUser} from '../../store/userStore/thunkUser';
 
-export interface ISignIn {
+export interface PropsSignIn {
   email: string;
   password: string;
 }
@@ -15,7 +16,7 @@ const SignIn: React.FC<{}> = () => {
   const dispatch = useDispatch();
 
   // eslint-disable-next-line no-shadow
-  const onFinish = ({email, password}: ISignIn) => {
+  const onFinish = ({email, password}: PropsSignIn): void => {
     dispatch(loginUser({email, password}));
   };
 
@@ -74,5 +75,8 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
-  button: {borderColor: '#3cc753', backgroundColor: '#3cc753'},
+  button: {
+    borderColor: '#3cc753',
+    backgroundColor: '#3cc753',
+  },
 });
